@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  webapp:
+    image: xdronedsl/webapp:latest
+    ports:
+      - "80:8080"
+    networks:
+      xdrone:
+        ipv4_address: 10.5.0.6
+  backend:
+    image: xdronedsl/backend:latest
+    networks:
+      xdrone:
+        ipv4_address: 10.5.0.5
+
+networks: 
+  xdrone:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
